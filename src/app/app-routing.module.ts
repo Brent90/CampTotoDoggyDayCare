@@ -8,11 +8,13 @@ import { EditClientComponent } from './components/edit-client/edit-client.compon
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ClientsComponent } from './components/clients/clients.component';
 
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
-  {path: 'login', component: LoginComponent},
+  // {path: '', component: DashboardComponent},
+  {path: '', component: ClientsComponent},
+  {path: 'login', component: ClientsComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'client/add', component: AddClientComponent},
   {path: 'client/edit/:id', component: EditClientComponent},
