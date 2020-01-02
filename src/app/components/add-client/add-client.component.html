@@ -17,6 +17,8 @@
     <div class="card-body">
       <form [formGroup]="clientForm">
 
+        {{clientForm.value | json}}
+
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input type="text" class="form-control" id="firstName" name="firstName" autocomplete="off" [class.is-invalid]="firstName.invalid && firstName.touched" formControlName="firstName">
@@ -59,9 +61,17 @@
 
         <div class="form-group">
             <label for="pets">Pet</label>
-            <input type="text" class="form-control" id="pets" name="pets" autocomplete="off" formControlName="pets">
+            <input type="text" class="form-control" id="pets" name="pets" autocomplete="off" [class.is-invalid]="pets.invalid && pets.touched" formControlName="pets">
+            <div *ngIf="pets.invalid && pets.touched">
+                <small *ngIf="pets.errors.required" class="text-danger">At Least One Pet Is Required</small>
+                <small *ngIf="pets.errors.maxlength" class="text-danger">Must Be Shorter Than Thirty Characters</small>
+            </div>
 
-            <button class="btn btn-secondary btn-sm mt-2">Add Another Pet</button>
+            <div formArrayName="additionalPets" *ngFor="let pet of additionalPets.controls; let i=index">
+                <input type="text" class="form-control my-1" [formControlName]="i"> 
+            </div>
+
+            <button class="btn btn-secondary btn-sm mt-2" (click)="addAdditionalPet()" [disabled]="pets.untouched || pets.invalid" >Add Another Pet</button>
         </div>
   
             <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="clientForm.invalid">
