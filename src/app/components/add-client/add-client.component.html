@@ -7,49 +7,64 @@
     <div class="col-md-6">
   
     </div>
-  </div>
+</div>
   
   <div class="card">
     <div class="card-header">
       Add New Client
     </div>
+
     <div class="card-body">
-      <form #clientForm="ngForm">
+      <form [formGroup]="clientForm">
 
         <div class="form-group">
           <label for="firstName">First Name</label>
-          <input type="text" class="form-control" id="firstName" name="firstName" autocomplete="off">
+          <input type="text" class="form-control" id="firstName" name="firstName" autocomplete="off" [class.is-invalid]="firstName.invalid && firstName.touched" formControlName="firstName">
+          <div *ngIf="firstName.invalid && firstName.touched">
+              <small *ngIf="firstName.errors.required" class="text-danger">First Name Is Required</small>
+              <small *ngIf="firstName.errors.minlength" class="text-danger">Must Be Longer Than Two Characters</small>
+              <small *ngIf="firstName.errors.maxlength" class="text-danger">Must Be Shorter Than Thirty Characters</small>
+          </div>
         </div>
   
         <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" autocomplete="off">
+            <input type="text" class="form-control" id="lastName" name="lastName" autocomplete="off" [class.is-invalid]="lastName.invalid && lastName.touched" formControlName="lastName">
+            <div *ngIf="lastName.invalid && lastName.touched">
+                <small *ngIf="lastName.errors.required" class="text-danger">Last Name Is Required</small>
+                <small *ngIf="lastName.errors.minlength" class="text-danger">Must Be Longer Than Two Characters</small>
+                <small *ngIf="lastName.errors.maxlength" class="text-danger">Must Be Shorter Than Thirty Characters</small>
+            </div>
         </div>
   
         
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" name="phone" autocomplete="off">
+            <input type="tel" class="form-control" id="phone" name="phone" autocomplete="off" [class.is-invalid]="phone.invalid && phone.touched" formControlName="phone">
+            <div *ngIf="phone.invalid && phone.touched">
+                <small *ngIf="phone.errors.required" class="text-danger">Valid Phone Number Is Required</small>
+                <small *ngIf="phone.errors.pattern" class="text-danger">Phone Number Is Not Valid</small>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" name="email" autocomplete="off">
+            <input type="text" class="form-control" id="email" name="email" autocomplete="off" [class.is-invalid]="email.invalid && email.touched" formControlName="email">
+            <div *ngIf="email.invalid && email.touched">
+                <small *ngIf="email.errors.required" class="text-danger">Valid Email Is Required</small>
+                <small *ngIf="email.errors.pattern" class="text-danger">Email Is Not Valid</small>
+                <small *ngIf="email.errors.maxlength" class="text-danger">Must Be Shorter Than Fourty Characters</small>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="pets">Pet</label>
-            <input type="text" class="form-control" id="pets" name="pets" autocomplete="off">
+            <input type="text" class="form-control" id="pets" name="pets" autocomplete="off" formControlName="pets">
 
             <button class="btn btn-secondary btn-sm mt-2">Add Another Pet</button>
         </div>
-
-        <div class="form-group">
-            <label for="balanceDue">Balance Due</label>
-            <input type="number" class="form-control" id="balanceDue" name="balanceDue">
-        </div>
   
-            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+            <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="clientForm.invalid">
       </form>
 
 
