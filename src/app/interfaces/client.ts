@@ -5,7 +5,7 @@ export interface Client {
     lastName?: string;
     phone?: string;
     email?: string;
-    pets?: [];
+    pets?: any;
     balanceDue?: number;
 
 }

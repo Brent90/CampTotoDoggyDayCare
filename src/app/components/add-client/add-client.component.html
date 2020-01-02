@@ -15,7 +15,7 @@
     </div>
 
     <div class="card-body">
-      <form [formGroup]="clientForm">
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
 
         {{clientForm.value | json}}
 
@@ -71,10 +71,10 @@
                 <input type="text" class="form-control my-1" [formControlName]="i"> 
             </div>
 
-            <button class="btn btn-secondary btn-sm mt-2" (click)="addAdditionalPet()" [disabled]="pets.untouched || pets.invalid" >Add Another Pet</button>
+            <button type="button" class="btn btn-secondary btn-sm mt-2" (click)="addAdditionalPet()" >Add Another Pet</button>
         </div>
   
-            <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="clientForm.invalid">
+            <input type="submit" value="Submit" class="btn btn-primary btn-block" >
       </form>
 
 
