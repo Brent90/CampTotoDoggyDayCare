@@ -14,7 +14,7 @@ import { ClientsComponent } from './components/clients/clients.component';
 const routes: Routes = [
   // {path: '', component: DashboardComponent},
   {path: '', component: ClientsComponent},
-  {path: 'login', component: ClientsComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'client/add', component: AddClientComponent},
   {path: 'client/edit/:id', component: EditClientComponent},
