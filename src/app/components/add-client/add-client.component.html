@@ -1,1 +1,57 @@
-<p>add-client works!</p>
+<div class="row mb-3">
+    <div class="col-md-6">
+      <a routerLink="/" class="btn btn-link">
+        <i class="fa fa-arrow-circle-o-left"></i> Back To Dashboard
+      </a>
+    </div>
+    <div class="col-md-6">
+  
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      Add New Client
+    </div>
+    <div class="card-body">
+      <form #clientForm="ngForm">
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" autocomplete="off">
+        </div>
+  
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" autocomplete="off">
+        </div>
+  
+        
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" name="email" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="pets">Pet</label>
+            <input type="text" class="form-control" id="pets" name="pets" autocomplete="off">
+
+            <button class="btn btn-secondary btn-sm mt-2">Add Another Pet</button>
+        </div>
+
+        <div class="form-group">
+            <label for="balanceDue">Balance Due</label>
+            <input type="number" class="form-control" id="balanceDue" name="balanceDue">
+        </div>
+  
+            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+      </form>
+
+
+    </div>
+  </div>
