@@ -1,0 +1,26 @@
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h4 class="text-center" style="text-decoration: underline;">Cash</h4>
+
+           <div class="input-group">
+               <input type="number" min=0 placeholder="Enter Amount Given" class="form-control" [class.is-invalid]="invalidAmount" [(ngModel)]="amountGiven">
+               <span class="input-group-btn">
+                   <button class="btn btn-primary" (click)="calculateChange()" [disabled]="parentData.balanceDue === 0">Calculate Change</button>
+               </span>
+            </div>
+
+            <small *ngIf="invalidAmount" class="text-danger">Invalid Amount Was Given</small>
+
+
+       <hr>
+       <h6>Change Due: {{changeDue | currency:"USD":"symbol"}}</h6>
+
+
+    </div>
+
+    <div class="col-md-6">
+        <h4 class="text-center" style="text-decoration: underline;">Card</h4>
+    </div>
+</div>

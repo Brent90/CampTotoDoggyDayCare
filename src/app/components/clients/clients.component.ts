@@ -23,7 +23,7 @@ export class ClientsComponent implements OnInit {
 
   getProjectedProfit() {
     this.projectedProfit = this.clients.reduce((total, client)=> {
-      return total + client.balanceDue;
+      return total + parseFloat(client.balanceHolder.toString());
     }, 0);
   }
 

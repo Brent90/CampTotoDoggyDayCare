@@ -21,6 +21,7 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlashMessagesModule} from 'angular2-flash-messages';
+import { ClientPaymentComponent } from './components/client-payment/client-payment.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {FlashMessagesModule} from 'angular2-flash-messages';
     RegisterComponent,
     SettingsComponent,
     PageNotFoundComponent,
+    ClientPaymentComponent,
   ],
   imports: [
     BrowserModule,

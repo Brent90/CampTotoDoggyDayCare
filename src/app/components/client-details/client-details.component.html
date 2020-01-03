@@ -21,13 +21,24 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-8">
-                <h5>Balance Due: {{client.balanceDue | currency:"USD":"symbol"}} </h5>
+                <h5>
+                    Balance Due: {{client.balanceDue | currency:"USD":"symbol"}}
+                     <a (click)="showUpdate = !showUpdate"><i class="fa fa-edit"></i> </a> 
+
+                     <div class="input-group mt-3" style="width: 40%; padding:10x;" [hidden]="!showUpdate" >
+                        <input type="number" class="form-control" min="0" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-primary" type="button">Update</button>
+                        </div>
+                    </div>
+             
+                </h5>
             </div>
             <div class="col-md-4 pull-right">
                 <div class="btn-group">
-                    <button class="btn btn-outline-primary mr-2">Half Day</button>
-                    <button class="btn btn-outline-primary mr-2">Full Day</button>
-                    <button (click)="isOtherSelected = !isOtherSelected" class="btn btn-outline-primary">Other</button>
+                    <button class="btn btn-outline-primary mr-2" (click)="updateClientBalance('halfDay')">Half Day</button>
+                    <button class="btn btn-outline-primary mr-2" (click)="updateClientBalance('fullDay')">Full Day</button>
+                    <button class="btn btn-outline-primary" (click)="isOtherSelected = !isOtherSelected" >Other</button>
                 </div>
             </div>
 
@@ -36,14 +47,27 @@
             </div>
             <div class="col-md-4">
                 <div class="input-group mb-3" style="width: 80%; padding:10px" [hidden]="!isOtherSelected">
-                    <input type="number" class="form-control" placeholder="Add Amount"  aria-describedby="basic-addon2">
+                    <input type="number" class="form-control" min="0" [(ngModel)]="otherPrice" placeholder="Add Amount" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                      <button (click)="isOtherSelected = !isOtherSelected" class="btn btn-outline-primary" type="button">Add</button>
+                      <button (click)="updateClientBalance('other')" class="btn btn-outline-primary" type="button">Add</button>
                     </div>
                 </div>
             </div>
 
         </div>
+
+
+    <hr>
+
+    <div class="row">
+         <div class="col-md-12">
+             <h6><button class="btn btn-success" (click)="showPaymentForm = !showPaymentForm" [disabled]="client.balanceDue === 0">Make Payment</button></h6>
+
+             <app-client-payment *ngIf="showPaymentForm" [parentData]="client"></app-client-payment>
+
+        </div>
+    </div>
+   
   
 
     <hr>

@@ -19,7 +19,7 @@ export class ClientService {
 
 
   constructor(private afs: AngularFirestore) { 
-    this.clientsCollection = this.afs.collection('clients', ref => ref.orderBy('balanceDue', 'asc'));
+    this.clientsCollection = this.afs.collection('clients', ref => ref.orderBy('balanceDue', 'desc'));
   }
 
   getClients(): Observable<Client[]> {
@@ -52,5 +52,9 @@ export class ClientService {
     this.clientsCollection.add(client);
   }
 
+  updateClient(client: Client) {
+    this.clientDoc = this.afs.doc(`clients/${client.id}`);
+    this.clientDoc.update(client);
+  }
  
 }

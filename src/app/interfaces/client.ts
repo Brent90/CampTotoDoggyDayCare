@@ -7,5 +7,6 @@ export interface Client {
     email?: string;
     pets?: any;
     balanceDue?: number;
+    balanceHolder?: number;
 
 }

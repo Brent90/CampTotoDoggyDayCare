@@ -14,8 +14,13 @@ export class ClientDetailsComponent implements OnInit {
   id: string;
   client: Client;
   clientPets = [];
-
+  halfDayPrice:number = 15;
+  fullDayPrice:number = 30;
+  otherPrice:number;
+  showUpdate:boolean = false;
   isOtherSelected:boolean = false;
+  showPaymentForm:boolean = false;
+
 
   constructor(private _clientService: ClientService, private _router: Router, private _route: ActivatedRoute, private _flashMessages: FlashMessagesService) { }
 
@@ -36,5 +41,31 @@ export class ClientDetailsComponent implements OnInit {
   showOtherField():void {
     console.log('other')
   }
+
+
+  updateClientBalance(opition:string) {
+    if(opition === 'halfDay') {
+      this.client.balanceDue += this.halfDayPrice;
+      this.client.balanceHolder += this.halfDayPrice;
+    }
+    
+    if(opition === 'fullDay') {
+      this.client.balanceDue += this.fullDayPrice;
+      this.client.balanceHolder += this.fullDayPrice;
+    }
+
+    if(opition === 'other') {
+      if(this.otherPrice === null || isNaN(this.otherPrice)) {
+        this.otherPrice = 0;
+      }
+
+      this.client.balanceDue += this.otherPrice;
+      this.client.balanceHolder += this.otherPrice;
+      this.isOtherSelected = !this.isOtherSelected;      
+    }
+
+    this._clientService.updateClient(this.client);
+  }
+
 
 }
