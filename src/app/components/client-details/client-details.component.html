@@ -1,1 +1,70 @@
-<p>client-details works!</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <a routerLink="/" class="btn btn-link"> <i class="fa fa-arrow-circle-o-left"></i> Go Back </a>
+    </div>
+    <div class="col-md-6">
+        <div class="btn-group pull-right">
+            <a routerLink="/client/edit/{{id}}" class="btn btn-dark">Edit Client</a>
+            <button (click)="deleteUser()" class="btn btn-danger">Delete Client</button>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="client" class="card">
+    <h3 class="card-header">
+        {{client.firstName}} {{client.lastName}}
+    </h3>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <h5>Balance Due: {{client.balanceDue | currency:"USD":"symbol"}} </h5>
+            </div>
+            <div class="col-md-4 pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-outline-primary mr-2">Half Day</button>
+                    <button class="btn btn-outline-primary mr-2">Full Day</button>
+                    <button (click)="isOtherSelected = !isOtherSelected" class="btn btn-outline-primary">Other</button>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+            
+            </div>
+            <div class="col-md-4">
+                <div class="input-group mb-3" style="width: 80%; padding:10px" [hidden]="!isOtherSelected">
+                    <input type="number" class="form-control" placeholder="Add Amount"  aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button (click)="isOtherSelected = !isOtherSelected" class="btn btn-outline-primary" type="button">Add</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+  
+
+    <hr>
+
+    <ul class="list-group">
+        <li class="list-group-item">Email: {{client.email}}</li>
+        <li class="list-group-item">Phone: {{client.phone}}</li>
+        <li *ngIf="clientPets?.length === 1" class="list-group-item">Pet: {{client.pets}}</li>
+        <li *ngIf="clientPets?.length > 1" class="list-group-item">Pets: {{client.pets}}</li>
+    </ul>
+
+    </div>
+
+</div>
+
+<br><br>
+
+<div class="row">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Prices</li>
+        <li class="list-group-item">Half Day - $15</li>
+        <li class="list-group-item">Full Day - $30</li>
+    </ul>
+</div>

@@ -71,10 +71,10 @@
                 <input type="text" class="form-control my-1" [formControlName]="i"> 
             </div>
 
-            <button type="button" class="btn btn-secondary btn-sm mt-2" (click)="addAdditionalPet()" >Add Another Pet</button>
+            <button type="button" class="btn btn-secondary btn-sm mt-2" [disabled]="pets.untouched || pets.invalid" (click)="addAdditionalPet()" >Add Another Pet</button>
         </div>
   
-            <input type="submit" value="Submit" class="btn btn-primary btn-block" >
+            <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="clientForm.invalid" >
       </form>
 
 
