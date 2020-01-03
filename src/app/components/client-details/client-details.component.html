@@ -1,7 +1,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <a routerLink="/" class="btn btn-link"> <i class="fa fa-arrow-circle-o-left"></i> Go Back </a>
+        <a routerLink="/" class="btn btn-link"> <i class="fa fa-arrow-circle-o-left"></i> Back To Dashboard </a>
     </div>
     <div class="col-md-6">
         <div class="btn-group pull-right">
@@ -10,7 +10,7 @@
         </div>
     </div>
 </div>
-
+      
 <hr>
 
 <div *ngIf="client" class="card">
@@ -22,15 +22,15 @@
         <div class="row">
             <div class="col-md-8">
                 <h5>
-                    Balance Due: {{client.balanceDue | currency:"USD":"symbol"}}
-                     <a (click)="showUpdate = !showUpdate"><i class="fa fa-edit"></i> </a> 
+                    Balance Due: <span [class.text-danger]="client.balanceDue >0">{{client.balanceDue | currency:"USD":"symbol"}} </span> 
+                     <!-- <a (click)="update()"><i class="fa fa-edit"></i> </a> 
 
                      <div class="input-group mt-3" style="width: 40%; padding:10x;" [hidden]="!showUpdate" >
-                        <input type="number" class="form-control" min="0" aria-describedby="basic-addon2">
+                        <input type="number" class="form-control" min="0" [(ngModel)]="updateAmount" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                           <button class="btn btn-outline-primary" type="button">Update</button>
                         </div>
-                    </div>
+                    </div> -->
              
                 </h5>
             </div>
@@ -75,8 +75,12 @@
     <ul class="list-group">
         <li class="list-group-item">Email: {{client.email}}</li>
         <li class="list-group-item">Phone: {{client.phone}}</li>
-        <li *ngIf="clientPets?.length === 1" class="list-group-item">Pet: {{client.pets}}</li>
-        <li *ngIf="clientPets?.length > 1" class="list-group-item">Pets: {{client.pets}}</li>
+        <li *ngIf="clientPets?.length === 1" class="list-group-item">
+           Pet: <p style="text-align: left; display: inline;" *ngFor="let pet of client.pets"><a routerLink="/pet-profile/{{client.id}}/{{pet}}" style="color: inherit"> {{pet}} </a></p>
+        </li>
+        <li *ngIf="clientPets?.length > 1" class="list-group-item">
+           Pets: <p style="text-align: left; display: inline;" *ngFor="let pet of client.pets"><a routerLink="/pet-profile/{{client.id}}/{{pet}}" style="color: inherit"> {{pet}} </a></p>
+        </li>
     </ul>
 
     </div>

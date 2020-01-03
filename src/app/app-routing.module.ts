@@ -9,6 +9,7 @@ import { ClientDetailsComponent } from './components/client-details/client-detai
 import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ClientsComponent } from './components/clients/clients.component';
+import { PetProfileComponent } from './components/pet-profile/pet-profile.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'client/edit/:id', component: EditClientComponent},
   {path: 'client/:id', component: ClientDetailsComponent},
   {path: 'settings', component: SettingsComponent},
+  {path: 'pet-profile/:id/:name', component: PetProfileComponent},
   {path: '**', component: PageNotFoundComponent}
 ]
 

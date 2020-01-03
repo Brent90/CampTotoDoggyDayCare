@@ -25,7 +25,9 @@
             <td>{{client.firstName}} {{client.lastName}}</td>
             <td>{{client.phone}}</td>
             <td>{{client.email}}</td>
-            <td>{{client.pets}}</td>
+            <td>
+                <p style="text-align: left; display: inline;" *ngFor="let pet of client.pets"><a routerLink="/pet-profile/{{client.id}}/{{pet}}" style="color: inherit">{{pet}} </a></p>
+            </td>
             <td>{{client.balanceDue | currency:"USD":"symbol"}}</td>
             <td><a routerLink="client/{{client.id}}" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i>Details</a></td>
 

@@ -22,6 +22,9 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import { ClientPaymentComponent } from './components/client-payment/client-payment.component';
+import { PetProfileComponent } from './components/pet-profile/pet-profile.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { ClientPaymentComponent } from './components/client-payment/client-payme
     SettingsComponent,
     PageNotFoundComponent,
     ClientPaymentComponent,
+    PetProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ import { ClientPaymentComponent } from './components/client-payment/client-payme
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
