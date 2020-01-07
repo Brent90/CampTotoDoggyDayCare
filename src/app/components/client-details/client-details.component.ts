@@ -3,6 +3,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Client } from 'src/app/interfaces/client';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-client-details',
@@ -20,9 +21,16 @@ export class ClientDetailsComponent implements OnInit {
   showUpdate:boolean = false;
   isOtherSelected:boolean = false;
   showPaymentForm:boolean = false;
+  isAdmin:boolean;
 
 
-  constructor(private _clientService: ClientService, private _router: Router, private _route: ActivatedRoute, private _flashMessages: FlashMessagesService) { }
+  constructor(
+    private _clientService: ClientService, 
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _flashMessages: FlashMessagesService,
+    private _authService: AuthService
+    ) { }
 
   ngOnInit() {
     //grab id from url
@@ -32,6 +40,18 @@ export class ClientDetailsComponent implements OnInit {
       this.client = client;
       //this.clientPets = client.pets;
     });
+
+    //check if employee is admin, if true then can delete a client
+    this._authService.getAuth().subscribe(auth => {
+      if(auth){
+        if(auth.email === 'admin@gmail.com') {
+          this.isAdmin = true;
+        }
+      }
+    });
+ 
+
+
   }
 
   deleteClient() {

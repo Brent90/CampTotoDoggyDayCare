@@ -6,7 +6,7 @@
     <div class="col-md-6">
         <div class="btn-group pull-right">
             <a routerLink="/client/edit/{{id}}"  class="btn btn-dark">Edit Client</a>
-            <button (click)="deleteClient()" class="btn btn-danger">Delete Client</button>
+            <button (click)="deleteClient()" [disabled]="!isAdmin" data-toggle="tooltip" data-placement="right" title="Only Admin Can Delete" class="btn btn-danger">Delete Client</button>
         </div>
     </div>
 </div>

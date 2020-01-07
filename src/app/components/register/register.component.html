@@ -1,1 +1,52 @@
-<p>register works!</p>
+
+  <div class="card">
+    <div class="card-header">
+      Register New Employee
+    </div>
+
+    <div class="card-body" >
+      <form [formGroup]="employeeRegistrationForm" (ngSubmit)="onSubmit()" >
+
+        {{employeeRegistrationForm.value | json}}
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" name="email" autocomplete="off" [class.is-invalid]="email.invalid && email.touched" formControlName="email">
+            <div *ngIf="email.invalid && email.touched">
+                <small *ngIf="email.errors.required" class="text-danger">Valid Email Is Required</small>
+                <small *ngIf="email.errors.pattern" class="text-danger">Email Is Not Valid</small>
+                <small *ngIf="email.errors.maxlength" class="text-danger">Must Be Shorter Than Fourty Characters</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm-email">Confirm Email</label>
+            <input type="text" class="form-control" id="confirm-email" name="confirmEmail" autocomplete="off" [class.is-invalid]="employeeRegistrationForm.errors?.emailMissMatch " formControlName="confirmEmail">
+            <small *ngIf="employeeRegistrationForm.errors?.emailMissMatch"  class="text-danger">Emails Do Not Match</small>
+            
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" autocomplete="off" [class.is-invalid]="password.invalid && password.touched" formControlName="password">
+            <div *ngIf="password.invalid && password.touched">
+                <small *ngIf="password.errors.required" class="text-danger">Valid Password Is Required</small>
+                <small *ngIf="password.errors.minlength" class="text-danger">Must Be More Than Three Characters</small>
+                <small *ngIf="password.errors.maxlength" class="text-danger">Must Be Shorter Than Thirty Characters</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm-password" name="confirmPassword" autocomplete="off" [class.is-invalid]="employeeRegistrationForm.errors?.passwordMissMatch"  formControlName="confirmPassword">
+            <small *ngIf="employeeRegistrationForm.errors?.passwordMissMatch" class="text-danger">Passwords Do Not Match</small>
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="employeeRegistrationForm.invalid" >
+
+      </form>
+
+
+    </div>
+  </div>
+

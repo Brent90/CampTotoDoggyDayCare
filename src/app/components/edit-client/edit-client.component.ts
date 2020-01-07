@@ -4,6 +4,7 @@ import { Client } from 'src/app/interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-edit-client',
@@ -27,7 +28,13 @@ export class EditClientComponent implements OnInit {
 
 
 
-  constructor(private _fb: FormBuilder, private _clientService: ClientService, private _router: Router, private _route: ActivatedRoute, private _flashMessages: FlashMessagesService) {
+  constructor(
+    private _fb: FormBuilder, 
+    private _clientService: ClientService, 
+    private _router: Router,
+    private _route: ActivatedRoute, 
+    private _flashMessages: FlashMessagesService
+    ) {
    
    }
 
@@ -49,7 +56,7 @@ export class EditClientComponent implements OnInit {
       pets: [[], [Validators.required, Validators.maxLength(29)]],
       additionalPets: this._fb.array([]),
       });
-      
+
 
   } 
 
@@ -67,7 +74,6 @@ export class EditClientComponent implements OnInit {
         pets: this.client.pets
       })
 
-      console.log(this.client.pets)
     }
 
 

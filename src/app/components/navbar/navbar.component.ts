@@ -16,14 +16,13 @@ export class NavbarComponent implements OnInit {
   isLoggedIn:boolean;
   isAdmin: boolean;
   loggedInEmployee:string;
-  subsciption: Subscription;
   
 
   constructor(private _authService: AuthService, private _router: Router, private _flashMessages: FlashMessagesService) { }
 
   ngOnInit() {
         //check if employee is already logged in
-        this.subsciption = this._authService.getAuth().subscribe(auth => {
+        this._authService.getAuth().subscribe(auth => {
           if(auth){
             this.isLoggedIn = true;
             this.loggedInEmployee = auth.email;
@@ -38,14 +37,15 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogout() {
-    this._authService.logout();
-    this.subsciption.unsubscribe();
-    this._flashMessages.show('Logout Successful!!',{
-    cssClass: 'alert-success', timeout:4000
-    });
-    this.isAdmin = false;
-    this.isLoggedIn = false;
-    this._router.navigate(['/login']);
+    if(confirm('Are You Sure You Want To Logout?')) {
+      this._authService.logout();
+      this._flashMessages.show('Logout Successful!!',{
+      cssClass: 'alert-success', timeout:4000
+      });
+      this.isAdmin = false;
+      this.isLoggedIn = false;
+      this._router.navigate(['/login']);
+      }
   }
 
 }
