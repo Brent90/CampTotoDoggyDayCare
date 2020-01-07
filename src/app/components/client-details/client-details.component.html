@@ -5,8 +5,8 @@
     </div>
     <div class="col-md-6">
         <div class="btn-group pull-right">
-            <a routerLink="/client/edit/{{id}}" class="btn btn-dark">Edit Client</a>
-            <button (click)="deleteUser()" class="btn btn-danger">Delete Client</button>
+            <a routerLink="/client/edit/{{id}}"  class="btn btn-dark">Edit Client</a>
+            <button (click)="deleteClient()" class="btn btn-danger">Delete Client</button>
         </div>
     </div>
 </div>
@@ -75,11 +75,8 @@
     <ul class="list-group">
         <li class="list-group-item">Email: {{client.email}}</li>
         <li class="list-group-item">Phone: {{client.phone}}</li>
-        <li *ngIf="clientPets?.length === 1" class="list-group-item">
-           Pet: <p style="text-align: left; display: inline;" *ngFor="let pet of client.pets"><a routerLink="/pet-profile/{{client.id}}/{{pet}}" style="color: inherit"> {{pet}} </a></p>
-        </li>
-        <li *ngIf="clientPets?.length > 1" class="list-group-item">
-           Pets: <p style="text-align: left; display: inline;" *ngFor="let pet of client.pets"><a routerLink="/pet-profile/{{client.id}}/{{pet}}" style="color: inherit"> {{pet}} </a></p>
+        <li class="list-group-item">
+           Pet(s): <p style="text-align: left; display: inline;" *ngFor="let pet of client.pets"><a routerLink="/pet-profile/{{client.id}}/{{pet}}" style="color: inherit"> {{pet}} </a></p>
         </li>
     </ul>
 

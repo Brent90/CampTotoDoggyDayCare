@@ -53,6 +53,8 @@ export class AddClientComponent implements OnInit {
     this.client.phone = this.clientForm.get('phone').value;
     this.client.email = this.clientForm.get('email').value;
     this.client.pets = this.petArray;
+    this.client.balanceDue = 0;
+    this.client.balanceHolder = this.client.balanceDue;
 
     this._clientService.addNewClient(this.client);
 

@@ -30,12 +30,19 @@ export class ClientDetailsComponent implements OnInit {
     //get client using id
     this._clientService.getClient(this.id).subscribe((client) => {
       this.client = client;
-      this.clientPets = client.pets;
+      //this.clientPets = client.pets;
     });
   }
 
-  deleteUser():void{
-
+  deleteClient() {
+    if(confirm('Are you sure you want to delete this client?')){
+      this._clientService.deleteClient(this.client);
+      this._flashMessages.show('Client was successfully removed', {
+        cssClass: 'alert-success', timeout: 4000
+      });
+      this.clientPets = [];
+      this._router.navigate(['/'])
+    }
   }
 
   showOtherField():void {
@@ -44,14 +51,18 @@ export class ClientDetailsComponent implements OnInit {
 
 
   updateClientBalance(opition:string) {
+    const fullName = this.client.firstName + " " + this.client.lastName;
+
     if(opition === 'halfDay') {
       this.client.balanceDue += this.halfDayPrice;
       this.client.balanceHolder += this.halfDayPrice;
+      this.getFlashMessage(fullName, 'Signed Up For A Half Day!!')
     }
     
     if(opition === 'fullDay') {
       this.client.balanceDue += this.fullDayPrice;
       this.client.balanceHolder += this.fullDayPrice;
+      this.getFlashMessage(fullName, 'Signed Up For A Full Day!!')
     }
 
     if(opition === 'other') {
@@ -62,9 +73,18 @@ export class ClientDetailsComponent implements OnInit {
       this.client.balanceDue += this.otherPrice;
       this.client.balanceHolder += this.otherPrice;
       this.isOtherSelected = !this.isOtherSelected;      
+      this.getFlashMessage(fullName, 'Signed Up For A Service!!')
     }
 
     this._clientService.updateClient(this.client);
+
+
+  }
+
+  getFlashMessage(name:string, message:string) {
+    this._flashMessages.show(name + " " + message , {
+      cssClass: 'alert-success', timeout: 4000
+    });
   }
 
 
