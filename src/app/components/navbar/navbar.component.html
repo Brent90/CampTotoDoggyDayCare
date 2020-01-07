@@ -15,14 +15,18 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a routerLink="/register" class="nav-link">Register Employee</a>
+                        <a routerLink="/register" class="nav-link" *ngIf="isAdmin">Register Employee</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="!isLoggedIn">
                         <a routerLink="/login"class="nav-link">Login</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="isAdmin">
                         <a routerLink="/settings"class="nav-link">Settings</a>
                     </li>
+                    <li class="nav-item" *ngIf="isLoggedIn">
+                        <a (click)="onLogout()" class="nav-link" style="cursor: pointer;">Logout</a>
+                    </li>
+                
                 </ul>
             </div>
 

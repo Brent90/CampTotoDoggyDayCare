@@ -24,7 +24,6 @@ export class ClientPaymentComponent implements OnInit {
     }
     
     if( this.amountGiven < this.parentData.balanceDue) {
-      console.log('invalid')
       this.invalidAmount = true;
     } else{
       this.invalidAmount = false;
