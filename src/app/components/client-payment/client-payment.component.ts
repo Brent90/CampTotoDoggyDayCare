@@ -49,7 +49,7 @@ export class ClientPaymentComponent implements OnInit, OnDestroy  {
       this.amountGiven = 0;
     }
     
-    if( this.amountGiven < this.parentData.balanceDue) {
+    if( this.amountGiven < this.parentData.balanceDue || this.amountGiven < 0 || this.amountGiven != +this.amountGiven.toFixed(2)) {
       this.invalidAmount = true;
     } else{
       this.invalidAmount = false;

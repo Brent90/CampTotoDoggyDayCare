@@ -106,7 +106,6 @@ export class EditClientComponent implements OnInit, OnDestroy {
 
     removePet(index:number) {
       this.client.pets.splice(index, 1);
-      console.log(this.client.pets);
     }
 
    

@@ -24,7 +24,9 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
   showPaymentForm:boolean = false;
   isAdmin:boolean;
   dailyNoteAdded:boolean = false;
-  subscription: Subscription;
+  clientServiceSubscription: Subscription;
+  authSubscription: Subscription;
+  isInvalidAmount:boolean = false;
 
 
 
@@ -40,13 +42,13 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
     //grab id from url
     this.id = this._route.snapshot.paramMap.get('id');
     //get client using id
-    this._clientService.getClient(this.id).subscribe((client) => {
+    this.clientServiceSubscription = this._clientService.getClient(this.id).subscribe((client) => {
       this.client = client;
       //this.clientPets = client.pets;
     });
 
     //check if employee is admin, if true then can delete a client
-    this.subscription = this._authService.getAuth().subscribe(auth => {
+    this.authSubscription = this._authService.getAuth().subscribe(auth => {
       if(auth){
         if(auth.email === 'admin@gmail.com') {
           this.isAdmin = true;
@@ -56,7 +58,8 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.clientServiceSubscription.unsubscribe();
+    this.authSubscription.unsubscribe();
   }
 
   deleteClient() {
@@ -88,6 +91,8 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
 
   updateClientBalance(opition:string) {
     const fullName = this.client.firstName + " " + this.client.lastName;
+    //close the payment form if it is already open
+    this.showPaymentForm = false;
 
     if(opition === 'halfDay') {
       this.client.balanceDue += this.halfDayPrice;
@@ -104,17 +109,18 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
     if(opition === 'other') {
       if(this.otherPrice === null || isNaN(this.otherPrice)) {
         this.otherPrice = 0;
+      }else if(this.otherPrice < 0 || this.otherPrice != +this.otherPrice.toFixed(2)){
+        this.isInvalidAmount = true;
+      }else{
+        this.isInvalidAmount = false;
+        this.client.balanceDue += this.otherPrice;
+        this.client.balanceHolder += this.otherPrice;
+        this.isOtherSelected = !this.isOtherSelected;      
+        this.getFlashMessage(fullName, 'Signed Up For A Service!!')
+        this._clientService.updateClient(this.client);
       }
-
-      this.client.balanceDue += this.otherPrice;
-      this.client.balanceHolder += this.otherPrice;
-      this.isOtherSelected = !this.isOtherSelected;      
-      this.getFlashMessage(fullName, 'Signed Up For A Service!!')
     }
-
-    this._clientService.updateClient(this.client);
-
-
+       
   }
 
   getFlashMessage(name:string, message:string) {

@@ -17,8 +17,6 @@
     <div class="card-body">
       <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
 
-        {{clientForm.value | json}}
-
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input type="text" class="form-control" id="firstName" name="firstName" autocomplete="off" [class.is-invalid]="firstName.invalid && firstName.touched" formControlName="firstName">

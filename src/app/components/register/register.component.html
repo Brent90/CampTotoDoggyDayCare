@@ -5,9 +5,7 @@
     </div>
 
     <div class="card-body" >
-      <form [formGroup]="employeeRegistrationForm" (ngSubmit)="onSubmit()" >
-
-        {{employeeRegistrationForm.value | json}}
+      <form [formGroup]="employeeRegistrationForm" (ngSubmit)="onSubmit(employeeRegistrationForm)" >
 
         <div class="form-group">
             <label for="email">Email</label>
@@ -31,7 +29,7 @@
             <input type="password" class="form-control" id="password" name="password" autocomplete="off" [class.is-invalid]="password.invalid && password.touched" formControlName="password">
             <div *ngIf="password.invalid && password.touched">
                 <small *ngIf="password.errors.required" class="text-danger">Valid Password Is Required</small>
-                <small *ngIf="password.errors.minlength" class="text-danger">Must Be More Than Three Characters</small>
+                <small *ngIf="password.errors.minlength" class="text-danger">Must Be More Than Five Characters</small>
                 <small *ngIf="password.errors.maxlength" class="text-danger">Must Be Shorter Than Thirty Characters</small>
             </div>
         </div>

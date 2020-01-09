@@ -56,6 +56,8 @@
                       <button (click)="updateClientBalance('other')" class="btn btn-outline-primary" type="button">Add</button>
                     </div>
                 </div>
+                <small *ngIf="isInvalidAmount" class="text-danger">Invalid Amount Was Given</small>
+
             </div>
 
         </div>
