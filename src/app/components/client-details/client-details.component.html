@@ -20,7 +20,7 @@
 
     <div class="card-body">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <h5>
                     Balance Due: <span [class.text-danger]="client.balanceDue >0">{{client.balanceDue | currency:"USD":"symbol"}} </span> 
                      <!-- <a (click)="update()"><i class="fa fa-edit"></i> </a> 
@@ -34,11 +34,15 @@
              
                 </h5>
             </div>
-            <div class="col-md-4 pull-right">
-                <div class="btn-group">
-                    <button class="btn btn-outline-primary mr-2" (click)="updateClientBalance('halfDay')">Half Day</button>
-                    <button class="btn btn-outline-primary mr-2" (click)="updateClientBalance('fullDay')">Full Day</button>
-                    <button class="btn btn-outline-primary" (click)="isOtherSelected = !isOtherSelected" >Other</button>
+
+            <div class="col-md-6 pull-right">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary " (click)="updateClientBalance('halfDay')">Half Day</button>
+                    <button type="button" class="btn btn-outline-primary " (click)="updateClientBalance('fullDay')">Full Day</button>
+                    <button type="button" class="btn btn-outline-primary " (click)="isOtherSelected = !isOtherSelected" >Other</button>
+                    <button type="button" class="btn btn-primary" (click)="dailyNoteAdded = !dailyNoteAdded" [disabled]="client.balanceDue === 0" *ngIf="!client.dailyNotesAdded">Add Note</button>
+                    <button type="button" class="btn btn-primary" (click)="dailyNoteAdded = !dailyNoteAdded" [disabled]="client.balanceDue === 0" *ngIf="client.dailyNotesAdded">See Notes</button>
+
                 </div>
             </div>
 
@@ -58,6 +62,15 @@
 
 
     <hr>
+
+    <div class="row mb-3 mt-2" *ngIf="dailyNoteAdded">
+        <div class="col-md-12">
+            <div class="input-group">
+                <textarea class="form-control custom-control" rows="3" style="resize:none" [(ngModel)]="client.dailyNotes"></textarea>     
+                <button class="btn btn-primary" (click)="onNoteAdd(client.dailyNotes)" [disabled]="client.dailyNotes.trim().length === 0">Add</button>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
          <div class="col-md-12">

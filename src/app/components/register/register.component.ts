@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 import { EmailValidator } from 'src/app/shared/email.validator';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { EmailValidator } from 'src/app/shared/email.validator';
 export class RegisterComponent implements OnInit {
   employeeRegistrationForm: FormGroup;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _flashMessages: FlashMessagesService, private _router: Router) { }
 
   ngOnInit() {
     this.employeeRegistrationForm = this._fb.group({
@@ -25,6 +27,10 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     console.log('logged')
+    this._flashMessages.show('New Employee Added!!', {
+      cssClass: 'alert-success', timeout: 4000
+    });
+    this._router.navigate(['/']);
   }
 
 

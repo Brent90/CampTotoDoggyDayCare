@@ -23,6 +23,11 @@ export class AuthService {
 
   logout() {
     this._afAuth.auth.signOut();
+
+    //this is a quick fix for 'ERROR FirebaseError: Missing or insufficient permissions'.  The problem is something is not
+    //being unsubscribed from the edit-client.component
+    //try and fix this later
+   // window.location.reload();  
   }
 
 }

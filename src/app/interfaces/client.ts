@@ -8,5 +8,7 @@ export interface Client {
     pets?: any;
     balanceDue?: number;
     balanceHolder?: number;
+    dailyNotes?: string;
+    dailyNotesAdded?: boolean;
 
 }

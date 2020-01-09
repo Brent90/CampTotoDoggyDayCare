@@ -2,14 +2,14 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
         <div class="container">
             <a routerLink="/" class="navbar-brand">Camp Toto Doggy Day Care</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" *ngIf="isLoggedIn">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a routerLink="/" class="nav-link">Dashboard</a>
+                        <a routerLink="/" class="nav-link" *ngIf="isLoggedIn">Dashboard</a>
                     </li>
                 </ul>
 
@@ -20,9 +20,7 @@
                     <li class="nav-item">
                         <a routerLink="/register" class="nav-link" *ngIf="isAdmin">Register Employee</a>
                     </li>
-                    <li class="nav-item" *ngIf="!isLoggedIn">
-                        <a routerLink="/login"class="nav-link">Login</a>
-                    </li>
+                 
                     <li class="nav-item" *ngIf="isAdmin">
                         <a routerLink="/settings"class="nav-link">Settings</a>
                     </li>

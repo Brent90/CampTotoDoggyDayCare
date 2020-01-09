@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Client } from 'src/app/interfaces/client';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-client-details',
   templateUrl: './client-details.component.html',
   styleUrls: ['./client-details.component.css']
 })
-export class ClientDetailsComponent implements OnInit {
+export class ClientDetailsComponent implements OnInit, OnDestroy {
 
   id: string;
   client: Client;
@@ -22,6 +23,9 @@ export class ClientDetailsComponent implements OnInit {
   isOtherSelected:boolean = false;
   showPaymentForm:boolean = false;
   isAdmin:boolean;
+  dailyNoteAdded:boolean = false;
+  subscription: Subscription;
+
 
 
   constructor(
@@ -42,16 +46,17 @@ export class ClientDetailsComponent implements OnInit {
     });
 
     //check if employee is admin, if true then can delete a client
-    this._authService.getAuth().subscribe(auth => {
+    this.subscription = this._authService.getAuth().subscribe(auth => {
       if(auth){
         if(auth.email === 'admin@gmail.com') {
           this.isAdmin = true;
         }
       }
     });
- 
+  }
 
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   deleteClient() {
@@ -67,6 +72,17 @@ export class ClientDetailsComponent implements OnInit {
 
   showOtherField():void {
     console.log('other')
+  }
+
+  onNoteAdd(dailyNote:string){
+    console.log(dailyNote);
+    this.client.dailyNotes = dailyNote.trim();
+    this.client.dailyNotesAdded = true;
+    this.dailyNoteAdded = !this.dailyNoteAdded;
+    this._clientService.updateClient(this.client);
+    this._flashMessages.show('Daily Note Was Added!', {
+      cssClass: "alert-success", timeout: 3000
+    });
   }
 
 

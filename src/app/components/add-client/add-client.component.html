@@ -74,7 +74,7 @@
             <button type="button" class="btn btn-secondary btn-sm mt-2" [disabled]="pets.untouched || pets.invalid" (click)="addAdditionalPet()" >Add Another Pet</button>
         </div>
   
-            <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="clientForm.invalid" >
+            <input type="submit" value="Submit" class="btn btn-primary btn-block" data-toggle="tooltip" data-placement="top" title="Form Must Be Filled Out Correctly To Submit"  [disabled]="clientForm.invalid" >
       </form>
 
 

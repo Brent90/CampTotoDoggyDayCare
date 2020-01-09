@@ -42,7 +42,7 @@
             <small *ngIf="employeeRegistrationForm.errors?.passwordMissMatch" class="text-danger">Passwords Do Not Match</small>
         </div>
 
-        <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="employeeRegistrationForm.invalid" >
+        <input type="submit" value="Submit" class="btn btn-primary btn-block" data-toggle="tooltip" data-placement="top" title="Form Must Be Filled Out Correctly To Submit" [disabled]="employeeRegistrationForm.invalid" >
 
       </form>
 

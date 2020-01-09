@@ -1,17 +1,18 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Client } from 'src/app/interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-client',
   templateUrl: './edit-client.component.html',
   styleUrls: ['./edit-client.component.css']
 })
-export class EditClientComponent implements OnInit {
+export class EditClientComponent implements OnInit, OnDestroy {
 
   clientForm: FormGroup;
   petArray = [];
@@ -26,6 +27,7 @@ export class EditClientComponent implements OnInit {
     balanceDue: 0
   }; 
 
+  subscription: Subscription;
 
 
   constructor(
@@ -34,16 +36,14 @@ export class EditClientComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute, 
     private _flashMessages: FlashMessagesService
-    ) {
-   
-   }
-
+    ) {}
 
   ngOnInit() {
         //grab id from url
      this.id = this._route.snapshot.paramMap.get('id');
+     
      //get client using id
-     this._clientService.getClient(this.id).subscribe((client) => {
+     this.subscription = this._clientService.getClient(this.id).subscribe((client) => {
        this.client = client;  
        this.loadClientData();
      });
@@ -57,8 +57,13 @@ export class EditClientComponent implements OnInit {
       additionalPets: this._fb.array([]),
       });
 
+      
 
   } 
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   addAdditionalPet() {
     this.additionalPets.push(this._fb.control(''));

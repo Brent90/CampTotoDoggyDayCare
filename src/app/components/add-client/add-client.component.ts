@@ -23,7 +23,10 @@ export class AddClientComponent implements OnInit {
     phone: '',
     email: '',
     pets: [],
-    balanceDue: 0
+    balanceDue: 0,
+    dailyNotes: '',
+    dailyNotesAdded: false
+
   }; 
 
   constructor(private _fb: FormBuilder, private _clientService: ClientService, private _router: Router, private _flashMessages: FlashMessagesService) { }
@@ -53,8 +56,12 @@ export class AddClientComponent implements OnInit {
     this.client.phone = this.clientForm.get('phone').value;
     this.client.email = this.clientForm.get('email').value;
     this.client.pets = this.petArray;
+
+    //set default values
     this.client.balanceDue = 0;
     this.client.balanceHolder = this.client.balanceDue;
+    this.client.dailyNotes = "";
+    this.client.dailyNotesAdded = false;
 
     this._clientService.addNewClient(this.client);
 

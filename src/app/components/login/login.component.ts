@@ -1,27 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   email:string;
   password:string;
+  subscription: Subscription;
+
   
   constructor(private _authService: AuthService, private _flashMessages: FlashMessagesService, private _router: Router) { }
 
   ngOnInit() {
     //check if employee is already logged in
-    this._authService.getAuth().subscribe(auth => {
+    this.subscription = this._authService.getAuth().subscribe(auth => {
       if(auth){
         this._router.navigate(['/']);
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onSubmit() {
