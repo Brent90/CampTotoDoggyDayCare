@@ -4,9 +4,11 @@
     </div>
 </div>
 
+<hr>
+
 
 <div class="row">
-    <div class="col-md-12 d-flex justify-content-center align-items-center">
+    <div class="col-md-6 ">
         <div class="card" style="width:400px" *ngIf="success" >
             <img class="card-img-top" alt="Card image" [src]="image">
             <div class="card-body">
@@ -14,5 +16,9 @@
               <a routerLink="/client/{{id}}" class="btn btn-primary">Owner Profile</a>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-6">
+        <app-pet-profile-form></app-pet-profile-form>
     </div>
 </div>

@@ -24,7 +24,6 @@ export class EditClientComponent implements OnInit, OnDestroy {
     phone: '',
     email: '',
     pets: [],
-    balanceDue: 0
   }; 
 
   subscription: Subscription;
@@ -93,6 +92,19 @@ export class EditClientComponent implements OnInit, OnDestroy {
       this.client.phone = this.clientForm.get('phone').value;
       this.client.email = this.clientForm.get('email').value;
       this.client.pets = this.petArray;
+
+      for(var x=0; x < this.petArray.length; x++) {
+        this.client.petInformation.push({
+          name: this.petArray[x],
+          breed: "",
+          age: 0,
+          birthday: "",
+          gender: "",
+          reminders: "",
+          owner: this.client.firstName + " " + this.client.lastName
+         });
+     
+       }
   
       this._clientService.updateClient(this.client);
   

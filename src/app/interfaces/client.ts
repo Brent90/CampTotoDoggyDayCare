@@ -10,5 +10,8 @@ export interface Client {
     balanceHolder?: number;
     dailyNotes?: string;
     dailyNotesAdded?: boolean;
+    reminder?: string;
+    testPets?: any;
+    petInformation?:any;
 
 }

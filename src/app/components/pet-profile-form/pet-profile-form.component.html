@@ -1,0 +1,69 @@
+
+
+<div class="card">
+    <div class="card-header">
+      Pet Infomation
+    </div>
+
+    <div class="card-body" *ngIf="pet">
+      <form [formGroup]="clientsPetInformationForm" (ngSubmit)="onSubmit(clientsPetInformationForm)">   
+
+        <div class="form-group row">
+            <label for="pet-name" class="col-3 col-form-label">Name</label>
+            <div class="col-9">
+              <input class="form-control" type="text" name="name" value="" id="pet-name" formControlName="name">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="breed" class="col-3 col-form-label">Breed</label>
+            <div class="col-9">
+              <input class="form-control" type="text"  id="breed" value="" name="breed" formControlName="breed" >
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="age" class="col-3 col-form-label">Age</label>
+            <div class="col-9">
+              <input class="form-control" type="number" id="age" name="age" formControlName="age">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="birthday" class="col-3 col-form-label">Birthday</label>
+            <div class="col-9">
+              <input class="form-control" type="date"  id="birthday" name="birthday" formControlName="birthday">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="gender" class="col-3 col-form-label">Gender</label>
+            <div class="col-9">
+              <input class="form-control" type="text"  id="gender" name="gender" formControlName="gender">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="reminders" class="col-3 col-form-label">Reminders</label>
+            <div class="col-9">
+              <textarea class="form-control" rows="5" style="min-width: 100%" id="reminders" name="reminders" formControlName="reminders"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="owner" class="col-3 col-form-label">Owner</label>
+            <div class="col-9">
+                <input class="form-control" type="text"  id="owner" name="owner" formControlName="owner">
+            </div>
+        </div>
+  
+        <input type="submit" value="Update" class="btn btn-primary btn-block" >
+      </form>
+
+    </div>
+
+
+</div>

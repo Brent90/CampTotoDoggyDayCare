@@ -24,6 +24,7 @@ import {FlashMessagesModule} from 'angular2-flash-messages';
 import { ClientPaymentComponent } from './components/client-payment/client-payment.component';
 import { PetProfileComponent } from './components/pet-profile/pet-profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PetProfileFormComponent } from './components/pet-profile-form/pet-profile-form.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
     PageNotFoundComponent,
     ClientPaymentComponent,
     PetProfileComponent,
+    PetProfileFormComponent,
   ],
   imports: [
     BrowserModule,

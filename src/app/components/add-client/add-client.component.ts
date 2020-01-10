@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Pet } from 'src/app/interfaces/pet';
 
 @Component({
   selector: 'app-add-client',
@@ -28,6 +29,7 @@ export class AddClientComponent implements OnInit {
     dailyNotesAdded: false
 
   }; 
+
 
   constructor(private _fb: FormBuilder, private _clientService: ClientService, private _router: Router, private _flashMessages: FlashMessagesService) { }
 
@@ -62,6 +64,22 @@ export class AddClientComponent implements OnInit {
     this.client.balanceHolder = this.client.balanceDue;
     this.client.dailyNotes = "";
     this.client.dailyNotesAdded = false;
+    this.client.petInformation = [];
+
+    for(var x=0; x < this.petArray.length; x++) {
+     this.client.petInformation.push({
+       name: this.petArray[x],
+       breed: "",
+       age: 0,
+       birthday: "",
+       gender: "",
+       reminders: "",
+       owner: this.client.firstName + " " + this.client.lastName
+      });
+  
+    }
+
+
 
     this._clientService.addNewClient(this.client);
 

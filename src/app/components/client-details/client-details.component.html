@@ -39,14 +39,24 @@
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-primary " (click)="updateClientBalance('halfDay')">Half Day</button>
                     <button type="button" class="btn btn-outline-primary " (click)="updateClientBalance('fullDay')">Full Day</button>
-                    <button type="button" class="btn btn-outline-primary " (click)="isOtherSelected = !isOtherSelected" >Other</button>
+                    <button type="button" class="btn btn-outline-primary " (click)="onOtherClicked()" >Other</button>
                     <button type="button" class="btn btn-primary" (click)="dailyNoteAdded = !dailyNoteAdded" [disabled]="client.balanceDue === 0" *ngIf="!client.dailyNotesAdded">Add Note</button>
                     <button type="button" class="btn btn-primary" (click)="dailyNoteAdded = !dailyNoteAdded" [disabled]="client.balanceDue === 0" *ngIf="client.dailyNotesAdded">See Notes</button>
-
                 </div>
+            
+                    <div class="input-group mt-2" style="width: 65%" [hidden]="!isOtherSelected">
+                        <input type="number" class="form-control" min="0" [(ngModel)]="otherPrice" placeholder="Add Amount" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                          <button (click)="updateClientBalance('other')" class="btn btn-outline-primary" type="button">Add</button>
+                        </div>
+                        
+                    </div>
+                    <small *ngIf="isInvalidAmount" [hidden]="!isOtherSelected" class="text-danger">Invalid Amount Was Given</small>
+    
+                
             </div>
 
-            <div class="col-md-8">
+            <!-- <div class="col-md-8">
             
             </div>
             <div class="col-md-4">
@@ -58,7 +68,7 @@
                 </div>
                 <small *ngIf="isInvalidAmount" class="text-danger">Invalid Amount Was Given</small>
 
-            </div>
+            </div> -->
 
         </div>
 

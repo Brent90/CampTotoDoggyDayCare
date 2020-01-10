@@ -88,6 +88,12 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  onOtherClicked() {
+    this.isOtherSelected = !this.isOtherSelected;
+    this.isInvalidAmount = false;
+    this.otherPrice = 0;
+  }
+
 
   updateClientBalance(opition:string) {
     const fullName = this.client.firstName + " " + this.client.lastName;
@@ -109,7 +115,7 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
     if(opition === 'other') {
       if(this.otherPrice === null || isNaN(this.otherPrice)) {
         this.otherPrice = 0;
-      }else if(this.otherPrice < 0 || this.otherPrice != +this.otherPrice.toFixed(2)){
+      }else if(this.otherPrice <= 0 || this.otherPrice != +this.otherPrice.toFixed(2)){
         this.isInvalidAmount = true;
       }else{
         this.isInvalidAmount = false;
@@ -117,10 +123,10 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
         this.client.balanceHolder += this.otherPrice;
         this.isOtherSelected = !this.isOtherSelected;      
         this.getFlashMessage(fullName, 'Signed Up For A Service!!')
-        this._clientService.updateClient(this.client);
+        
       }
     }
-       
+       this._clientService.updateClient(this.client);
   }
 
   getFlashMessage(name:string, message:string) {
